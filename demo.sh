@@ -6,9 +6,11 @@ download () {
   echo "Downloading binaries into /tmp/offen-demo-$1 ..."
   mkdir -p /tmp/offen-demo-$1 && cd /tmp/offen-demo-$1
   curl -sSL https://get.offen.dev/latest | tar -xz
-  echo ""
-  echo "Verifying download checksums ..."
-  command -v md5sum >/dev/null && md5sum -c checksums.txt
+  if [ -x "$(command -v md5sum)" ]; then
+    echo ""
+    echo "Verifying download checksums ..."
+    md5sum -c checksums.txt
+  fi
   echo ""
   echo "Done preparing. Next we'll be launching your demo."
 }
