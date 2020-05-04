@@ -8,7 +8,7 @@ download () {
   curl -sSL https://get.offen.dev/latest | tar -xz
   echo ""
   echo "Verifying download checksums ..."
-  md5sum -c checksums.txt
+  command -v md5sum >/dev/null && md5sum -c checksums.txt
   echo ""
   echo "Done preparing. Next we'll be launching your demo."
 }
