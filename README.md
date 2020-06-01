@@ -1,4 +1,8 @@
-# demo
+<a href="https://offen.dev/">
+    <img src="https://offen.github.io/press-kit/offen-material/gfx-GitHub-Offen-logo.svg" alt="Offen logo" title="Offen" width="150px"/>
+</a>
+
+# Demo
 Script to download and start an Offen demo
 
 ---
