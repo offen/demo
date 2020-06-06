@@ -33,8 +33,17 @@ run_demo () {
     ;;
     *)
       if [ -x "$(command -v docker)" ]; then
-        pull
-        docker run --rm -it -p 9876:9876 offen/offen:latest demo -port 9876
+        docker info > /dev/null 2>&1; ec=$?
+        case $ec in
+          0)
+            pull
+            docker run --rm -i -p 9876:9876 offen/offen:latest demo -port 9876
+          ;;
+          *)
+            echo "We tried running the demo in Docker, but it seems it is currently not running."
+            echo "Start Docker and try running this script again."
+            ;;
+        esac
       else
         echo "Your operating is currently not supported by this script."
         echo "You can try installing Docker and use the offen/offen image to run a demo."
