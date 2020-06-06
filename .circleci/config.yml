@@ -14,7 +14,7 @@ jobs:
       - run:
           name: Deploy to S3
           command: |
-            aws s3 aws s3 cp demo.sh s3://$BUCKET
+            aws s3 cp demo.sh s3://$BUCKET
             aws cloudfront create-invalidation --distribution-id $DISTRIBUTION --paths "/*"
 workflows:
   version: 2
