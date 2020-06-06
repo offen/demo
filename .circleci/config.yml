@@ -1,0 +1,31 @@
+version: 2.1
+
+jobs:
+  deploy:
+    docker:
+      - image: cimg/python:3.7
+    environment:
+      BUCKET: offen-demo
+      DISTRIBUTION: E1IS3FBYPLNH5V
+    working_directory: ~/offen
+    steps:
+      - checkout
+      - aws-cli/install
+      - run:
+          name: Deploy to S3
+          command: |
+            aws s3 aws s3 cp demo.sh s3://$BUCKET
+            aws cloudfront create-invalidation --distribution-id $DISTRIBUTION --paths "/*"
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - deploy:
+          context: AWS
+          filters:
+            branches:
+              only:
+                - master
+
+orbs:
+  aws-cli: circleci/aws-cli@1.1.0
