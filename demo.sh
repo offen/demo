@@ -33,7 +33,9 @@ run_demo () {
     ;;
     *)
       if [ -x "$(command -v docker)" ]; then
+        set +e
         docker info > /dev/null 2>&1; ec=$?
+        set -e
         case $ec in
           0)
             pull
@@ -41,7 +43,7 @@ run_demo () {
           ;;
           *)
             echo "We tried running the demo in Docker, but it seems it is currently not running."
-            echo "Start Docker and try running this script again."
+            echo "Please start Docker on your system and try running this script again."
             ;;
         esac
       else
