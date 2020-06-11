@@ -17,7 +17,7 @@ download () {
 
 pull () {
   echo ""
-  echo "Using Docker ..."
+  echo "Pulling latest Docker image ..."
   docker pull offen/offen:latest
 }
 
@@ -42,7 +42,7 @@ run_demo () {
             docker run --rm -i -p 9876:9876 offen/offen:latest demo -port 9876
           ;;
           *)
-            echo "We tried running the demo in Docker, but it seems it is currently not running."
+            echo "We tried to use Docker for your demo, but it seems it is currently not running."
             echo "Please start Docker on your system and try running this script again."
             ;;
         esac
