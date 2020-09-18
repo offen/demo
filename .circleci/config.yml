@@ -5,8 +5,8 @@ jobs:
     docker:
       - image: cimg/python:3.7
     environment:
-      BUCKET: offen-demo
-      DISTRIBUTION: E1IS3FBYPLNH5V
+      BUCKET: demo
+      MINIO_STORAGE: https://storage.offen.dev
     working_directory: ~/offen
     steps:
       - checkout
@@ -14,8 +14,7 @@ jobs:
       - run:
           name: Deploy to S3
           command: |
-            aws s3 cp demo.sh s3://$BUCKET
-            aws cloudfront create-invalidation --distribution-id $DISTRIBUTION --paths "/*"
+            AWS_ACCESS_KEY_ID=$MINIO_ACCESS_KEY AWS_SECRET_ACCESS_KEY=$MINIO_SECRET_KEY aws --endpoint $MINIO_STORAGE s3 cp demo.sh s3://$BUCKET
 workflows:
   version: 2
   deploy:
