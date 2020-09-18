@@ -12,13 +12,3 @@ This script is availabe at `https://demo.offen.dev` and can be used as a conveni
 ```sh
 curl -sS https://demo.offen.dev | bash
 ```
-
----
-
-### Upload the file to AWS S3
-
-Using valid credentials you can update the script using:
-
-```
-$ aws s3 cp demo.sh s3://offen-demo
-```
