@@ -4,27 +4,34 @@ jobs:
   deploy:
     docker:
       - image: cimg/python:3.7
-    environment:
-      BUCKET: demo
-      MINIO_STORAGE: https://storage.offen.dev
     working_directory: ~/offen
     steps:
       - checkout
-      - aws-cli/install
+      - install_mc
       - run:
-          name: Deploy to S3
+          name: Deploy to storage
           command: |
-            AWS_ACCESS_KEY_ID=$MINIO_ACCESS_KEY AWS_SECRET_ACCESS_KEY=$MINIO_SECRET_KEY aws --endpoint $MINIO_STORAGE s3 cp demo.sh s3://$BUCKET
+            mc cp demo.sh offen/demo
 workflows:
   version: 2
   deploy:
     jobs:
       - deploy:
-          context: AWS
+          context: Storage
           filters:
             branches:
               only:
                 - master
 
-orbs:
-  aws-cli: circleci/aws-cli@1.1.0
+commands:
+  install_mc:
+    description: Install MinIO client
+    steps:
+      - run:
+          name: Download client
+          working_directory: '~'
+          command: |
+            curl https://dl.min.io/client/mc/release/linux-amd64/mc -o mc
+            chmod +x mc
+            sudo mv mc /usr/local/bin/mc
+            command -v mc
