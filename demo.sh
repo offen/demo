@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 # Copyright 2020 - Offen Authors <hioffen@posteo.de>
 # SPDX-License-Identifier: MPL-2.0
 
