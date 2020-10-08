@@ -6,7 +6,7 @@ set -eo pipefail
 
 download () {
   echo "Downloading binaries into /tmp/offen-demo-$1 ..."
-  mkdir -p /tmp/offen-demo-$1 && cd /tmp/offen-demo-$1
+  mkdir -p /tmp/offen-demo-"$1" && cd /tmp/offen-demo-"$1"
   curl -sSL https://get.offen.dev | tar -xz
   if [ -x "$(command -v md5sum)" ]; then
     echo ""
@@ -26,11 +26,11 @@ pull () {
 run_demo () {
   case "$1" in
     Linux*)
-      download $(date +"%s")
+      download "$(date +"%s")"
       ./offen-linux-amd64 demo
     ;;
     Darwin*)
-      download $(date +"%s")
+      download "$(date +"%s")"
       ./offen-darwin-10.6-amd64 demo
     ;;
     *)
@@ -57,4 +57,4 @@ run_demo () {
   esac
 }
 
-run_demo $(uname -s)
+run_demo "$(uname -s)"
