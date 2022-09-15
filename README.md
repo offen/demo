@@ -3,11 +3,11 @@
 </a>
 
 # Demo
-Script to download and start an Offen demo
+Script to download and start an Offen Fair Web Analytics demo
 
 ---
 
-This script is availabe at `https://demo.offen.dev` and can be used as a convenience shortcut for running an Offen demo on your system:
+This script is availabe at `https://demo.offen.dev` and can be used as a convenience shortcut for running an Offen Fair Web Analytics demo on your system:
 
 ```sh
 curl -sS https://demo.offen.dev | bash
